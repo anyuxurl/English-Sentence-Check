@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_OPENAI_API_KEY": "@vite_openai_api_key",
+    "VITE_OPENAI_API_MODEL": "@vite_openai_api_model",
+    "VITE_OPENAI_BASE_URL": "@vite_openai_base_url"
+  }
+}

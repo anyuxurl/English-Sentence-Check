@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import SentenceCache from './cache';
 
 const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 const model = import.meta.env.VITE_OPENAI_API_MODEL;
@@ -9,6 +10,10 @@ const openai = new OpenAI({
   baseURL,
   dangerouslyAllowBrowser: true
 });
+
+const MAX_SENTENCE_LENGTH = 500; // 最大句子长度限制
+const API_COOLDOWN = 2000; // API调用冷却时间（毫秒）
+let lastApiCall = 0; // 上次API调用时间戳
 
 export interface ClauseAnalysis {
   type: string;
@@ -23,6 +28,39 @@ export interface SentenceAnalysis {
 }
 
 export async function analyzeSentenceWithGPT(sentence: string): Promise<SentenceAnalysis> {
+  // 检查句子长度
+  if (sentence.length > MAX_SENTENCE_LENGTH) {
+    return {
+      components: ['句子过长'],
+      clauses: [],
+      errors: [{
+        message: `句子长度超过${MAX_SENTENCE_LENGTH}个字符`,
+        suggestion: '请缩短句子长度，或将长句拆分为多个短句分别分析'
+      }]
+    };
+  }
+
+  // 检查API调用冷却时间
+  const now = Date.now();
+  if (now - lastApiCall < API_COOLDOWN) {
+    return {
+      components: ['请求过于频繁'],
+      clauses: [],
+      errors: [{
+        message: '请求过于频繁',
+        suggestion: `请等待${Math.ceil((API_COOLDOWN - (now - lastApiCall)) / 1000)}秒后再试`
+      }]
+    };
+  }
+
+  // 检查缓存
+  const cache = SentenceCache.getInstance();
+  const cachedResult = cache.get(sentence);
+  if (cachedResult) {
+    return cachedResult;
+  }
+
+  lastApiCall = now;
   try {
     const prompt = `请分析以下英语句子的语法结构，并以JSON格式返回分析结果。句子："${sentence}"
 
