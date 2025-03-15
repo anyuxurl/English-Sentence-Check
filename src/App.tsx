@@ -31,7 +31,10 @@ function App() {
 
   return (
     <div className="container">
-      <h1>英语句子分析工具</h1>
+      <div className="title-section">
+        <h1>SentenceFlow句流</h1>
+        <p className="subtitle">基于AI的英语句子分析助手</p>
+      </div>
       <div className="input-section">
         <textarea
           value={sentence}
@@ -80,6 +83,36 @@ function App() {
           </div>
         </div>
       )}
+
+      <footer className="footer">
+        <div className="author-section">
+          <h3>关于作者</h3>
+          <p>Kevin Cheng，</p>
+          <div className="social-links">
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+              <img src="/github.svg" alt="GitHub" className="social-icon" />
+            </a>
+            <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
+              <img src="/twitter.svg" alt="Twitter" className="social-icon" />
+            </a>
+          </div>
+        </div>
+
+        <div className="donate-section">
+          <h3>赞赏支持</h3>
+          <p>如果这个工具对你有帮助，欢迎赞赏支持～</p>
+          <div className="qr-codes">
+            <div className="qr-code-item">
+              <img src="/wechat-qr.svg" alt="微信赞赏码" className="qr-code" />
+              <span>微信赞赏</span>
+            </div>
+            <div className="qr-code-item">
+              <img src="/alipay-qr.svg" alt="支付宝收款码" className="qr-code" />
+              <span>支付宝</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

@@ -197,8 +197,184 @@ h1 {
   font-weight: 500;
 }
 
+.footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e8eaed;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.author-section,
+.donate-section {
+  flex: 1;
+  min-width: 300px;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.author-section:hover,
+.donate-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.footer h3 {
+  color: #1a73e8;
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.footer p {
+  color: #5f6368;
+  line-height: 1.5;
+  margin: 0 0 1.5rem 0;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
+.qr-codes {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.qr-code-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qr-code {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.qr-code:hover {
+  transform: scale(1.05);
+}
+
+.qr-code-item span {
+  color: #5f6368;
+  font-size: 0.9rem;
+}
+
 .error-suggestion {
   color: #1b5e20;
   margin: 0;
   font-size: 0.9rem;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .container {
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 12px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .input-section textarea {
+    font-size: 16px;
+    padding: 0.875rem;
+    min-height: 100px;
+  }
+
+  .input-section button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .analysis-block {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .clause-item,
+  .error-item {
+    padding: 0.875rem;
+  }
+
+  .footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .author-section,
+  .donate-section {
+    min-width: auto;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .qr-codes {
+    gap: 1rem;
+  }
+
+  .qr-code {
+    width: 100px;
+    height: 100px;
+  }
+
+  /* 移动端触摸反馈优化 */
+  .input-section button:active {
+    transform: scale(0.98);
+  }
+
+  .clause-item:active,
+  .error-item:active,
+  .analysis-block:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
+.title-section {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.subtitle {
+  color: #5f6368;
+  font-size: 1.1rem;
+  margin-top: -1rem;
+  font-weight: normal;
+  letter-spacing: 0.2px;
 }
